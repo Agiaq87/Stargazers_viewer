@@ -3,19 +3,27 @@ package it.giaquinto.stargazersviewer.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import it.giaquinto.stargazersviewer.model.InformationMessage
-import it.giaquinto.stargazersviewer.model.InformationType
+import it.giaquinto.stargazersviewer.model.data.InformationMessage
+import it.giaquinto.stargazersviewer.model.data.InformationType
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor() : ViewModel() {
 
     private var _info: MutableLiveData<InformationMessage> = MutableLiveData(InformationMessage("Nothing to show", InformationType.INFO))
-    val info: LiveData<InformationMessage> = _info
+    val info: LiveData<InformationMessage>
+        get() = _info
 
     private var _list: MutableLiveData<List<String>> = MutableLiveData(listOf())
-    val list: LiveData<List<String>> = _list
+    val list: LiveData<List<String>>
+        get() = _list
+
+    init {
+        loadData()
+    }
 
     fun search(data: String): Boolean {
         if (data.length >= 3) {
@@ -38,5 +46,11 @@ class HomeViewModel @Inject constructor() : ViewModel() {
         }
 
         return true
+    }
+
+    private fun loadData() = with(viewModelScope) {
+        launch {
+
+        }
     }
 }

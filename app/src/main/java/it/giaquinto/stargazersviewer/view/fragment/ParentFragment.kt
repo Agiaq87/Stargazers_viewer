@@ -1,4 +1,4 @@
-package it.giaquinto.stargazersviewer.view
+package it.giaquinto.stargazersviewer.view.fragment
 
 import android.view.View
 import androidx.fragment.app.Fragment

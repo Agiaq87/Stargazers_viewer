@@ -6,7 +6,7 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="it.giaquinto.stargazersviewer.model.InformationType" />
+        <import type="it.giaquinto.stargazersviewer.model.data.InformationType" />
         <variable
             name="homeViewModel"
             type="it.giaquinto.stargazersviewer.viewmodel.HomeViewModel" />
@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.HomeFragment">
+        tools:context=".view.fragment.HomeFragment">
 
         <TextView
             android:id="@+id/textview_first"
@@ -36,11 +36,12 @@
             android:id="@+id/button_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <SearchView
             android:id="@+id/searchView"
@@ -60,8 +61,11 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="10dp"
             android:visibility="@{homeViewModel.list.size() != 0 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/button_first"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_first" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_first"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

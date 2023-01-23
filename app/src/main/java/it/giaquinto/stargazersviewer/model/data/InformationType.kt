@@ -1,4 +1,4 @@
-package it.giaquinto.stargazersviewer.model
+package it.giaquinto.stargazersviewer.model.data
 
 import android.graphics.Color
 
