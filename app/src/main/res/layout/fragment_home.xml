@@ -6,7 +6,7 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="it.giaquinto.stargazersviewer.model.data.InformationType" />
+        <import type="it.giaquinto.stargazersviewer.utils.info.InformationType" />
         <variable
             name="homeViewModel"
             type="it.giaquinto.stargazersviewer.viewmodel.HomeViewModel" />
@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.fragment.HomeFragment">
+        tools:context=".ui.fragment.HomeFragment">
 
         <TextView
             android:id="@+id/textview_first"

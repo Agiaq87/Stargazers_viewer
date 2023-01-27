@@ -1,4 +1,4 @@
-package it.giaquinto.stargazersviewer.model.data
+package it.giaquinto.stargazersviewer.utils.info
 
 data class InformationMessage(
     val msg: String,

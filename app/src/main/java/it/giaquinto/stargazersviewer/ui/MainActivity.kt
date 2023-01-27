@@ -1,4 +1,4 @@
-package it.giaquinto.stargazersviewer.view
+package it.giaquinto.stargazersviewer.ui
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar

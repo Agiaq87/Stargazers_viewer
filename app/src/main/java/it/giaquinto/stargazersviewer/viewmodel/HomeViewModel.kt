@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import it.giaquinto.stargazersviewer.model.data.InformationMessage
-import it.giaquinto.stargazersviewer.model.data.InformationType
+import it.giaquinto.stargazersviewer.utils.info.InformationMessage
+import it.giaquinto.stargazersviewer.utils.info.InformationType
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package it.giaquinto.stargazersviewer.view.fragment
+package it.giaquinto.stargazersviewer.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
