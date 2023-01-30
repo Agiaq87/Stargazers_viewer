@@ -53,7 +53,7 @@
             android:layout_marginTop="@dimen/middle_margin"
             android:onQueryTextChange="@{(s) -> homeViewModel.fetchUsers(s)}"
             android:queryHint="@string/search_view_hint"
-            android:goIcon="@drawable/baseline_search_24"
+            android:searchHintIcon="@drawable/baseline_search_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

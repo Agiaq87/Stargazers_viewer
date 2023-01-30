@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="bindViewModel"
+            name="vm"
             type="it.giaquinto.stargazersviewer.ui.viewmodel.LoginViewModel" />
     </data>
 

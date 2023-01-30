@@ -9,9 +9,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import it.giaquinto.stargazersviewer.R
 import it.giaquinto.stargazersviewer.databinding.ActivityMainBinding
+import it.giaquinto.stargazersviewer.ui.viewmodel.MainActivityViewModel
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -21,19 +23,23 @@ class MainActivity : AppCompatActivity() {
     }
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    private val navController by lazy {
+        findNavController(R.id.nav_host_fragment_content_main)
+    }
+
+    private val viewModel: MainActivityViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            navController.navigate(R.id.SecondFragment)
         }
     }
 
@@ -48,14 +54,26 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_login -> true
             else -> super.onOptionsItemSelected(item)
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
+    fun goToLogin(item: MenuItem) = with(item){
+        when(itemId) {
+            R.id.action_login -> {
+                if (viewModel.isLoading())
+                    Snackbar.make(binding.root, R.string.user_already_logged, Snackbar.LENGTH_SHORT).show()
+                else
+                    navController.navigate(R.id.LoginFragment)
+            }
+            else -> return@with
+        }
+    }
+
 }

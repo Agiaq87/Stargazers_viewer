@@ -1,7 +1,7 @@
 package it.giaquinto.stargazersviewer.ui.state
 
 import it.giaquinto.stargazersviewer.data.model.UserInfoModel
-import it.giaquinto.stargazersviewer.utils.info.InformationMessage
+import it.giaquinto.stargazersviewer.data.model.info.InformationMessage
 
 data class HomeUiState(
     val isSignedIn: Boolean,

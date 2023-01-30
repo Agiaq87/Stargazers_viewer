@@ -11,8 +11,8 @@ import it.giaquinto.stargazersviewer.R
 import it.giaquinto.stargazersviewer.data.exception.UnauthorizedException
 import it.giaquinto.stargazersviewer.ui.state.HomeUiState
 import it.giaquinto.stargazersviewer.data.repository.UserInfoRepository
-import it.giaquinto.stargazersviewer.utils.info.InformationMessage
-import it.giaquinto.stargazersviewer.utils.info.InformationType
+import it.giaquinto.stargazersviewer.data.model.info.InformationMessage
+import it.giaquinto.stargazersviewer.data.model.info.InformationType
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
             informationMessage = InformationMessage("Nothing to show", InformationType.INFO)
         )
     )
-    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<HomeUiState> = _uiState
 
     private var _list: MutableLiveData<List<String>> = MutableLiveData(listOf())
     val list: LiveData<List<String>>

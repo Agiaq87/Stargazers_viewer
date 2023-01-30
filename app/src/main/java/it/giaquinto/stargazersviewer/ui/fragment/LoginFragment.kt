@@ -12,11 +12,13 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import it.giaquinto.stargazersviewer.R
 import it.giaquinto.stargazersviewer.databinding.FragmentLoginBinding
 import it.giaquinto.stargazersviewer.ui.viewmodel.LoginViewModel
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
@@ -55,6 +57,6 @@ class LoginFragment : Fragment() {
 
     private fun bindingPreparation() = binding.apply {
         lifecycleOwner = this@LoginFragment
-        bindViewModel = viewModel
+        vm = viewModel
     }
 }
