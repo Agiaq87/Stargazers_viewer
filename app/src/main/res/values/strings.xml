@@ -13,4 +13,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_view_hint">Search here user or repo</string>
     <string name="avatar">Avatar of user</string>
+    <string name="login_username">Your email</string>
+    <string name="login_password">Your password</string>
+    <string name="login">Login</string>
+    <string name="three_characters">Please insert at least three characters for searching</string>
+    <string name="network_exception">"Network error, please try again "</string>
+    <string name="nothing_found">Nothing to show</string>
 </resources>

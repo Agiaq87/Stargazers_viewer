@@ -6,7 +6,7 @@
     <data>
         <variable
             name="userDataset"
-            type="it.giaquinto.stargazersviewer.data.model.UserInfo" />
+            type="it.giaquinto.stargazersviewer.data.model.UserInfoModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

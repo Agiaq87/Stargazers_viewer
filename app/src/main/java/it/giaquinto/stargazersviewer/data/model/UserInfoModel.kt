@@ -3,7 +3,7 @@ package it.giaquinto.stargazersviewer.data.model
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class UserInfo(
+data class UserInfoModel(
     @SerializedName("avatar_url")
     val avatarUrl: String,
     @SerializedName("bio")

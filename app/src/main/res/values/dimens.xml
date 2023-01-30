@@ -2,6 +2,17 @@
     <dimen name="low_margin">4dp</dimen>
     <dimen name="middle_margin">8dp</dimen>
     <dimen name="standard_margin">16dp</dimen>
-    <dimen name="avatar_image">48dp</dimen>
+    <dimen name="high_margin">32dp</dimen>
+    <dimen name="extra_high_margin">48dp</dimen>
+    <dimen name="xxl_margin">96dp</dimen>
+    <dimen name="xxxl_margin">112dp</dimen>
+
     <dimen name="icon_image">24dp</dimen>
+
+    <dimen name="avatar_image">48dp</dimen>
+    <dimen name="double_avatar_image">96dp</dimen>
+
+    <dimen name="standard_padding">16dp</dimen>
+
+    <dimen name="button_width">188dp</dimen>
 </resources>

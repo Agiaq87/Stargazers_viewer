@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import it.giaquinto.stargazersviewer.databinding.GitHubItemBinding
-import it.giaquinto.stargazersviewer.data.model.UserInfo
+import it.giaquinto.stargazersviewer.data.model.UserInfoModel
 import it.giaquinto.stargazersviewer.ui.holder.RecyclerViewHolder
 
-class RecyclerAdapter(private val list: List<UserInfo>): RecyclerView.Adapter<RecyclerViewHolder>() {
+class RecyclerAdapter(private val list: List<UserInfoModel>): RecyclerView.Adapter<RecyclerViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder =
         RecyclerViewHolder(
             GitHubItemBinding.inflate(
