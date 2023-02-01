@@ -14,9 +14,11 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import it.giaquinto.stargazersviewer.R
 import it.giaquinto.stargazersviewer.databinding.FragmentHomeBinding
+import it.giaquinto.stargazersviewer.ui.adapter.RecyclerAdapter
 import it.giaquinto.stargazersviewer.ui.viewmodel.HomeViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -29,6 +31,10 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     private lateinit var binding: FragmentHomeBinding
+
+    private val adapter: RecyclerAdapter by lazy {
+        RecyclerAdapter(listOf())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,10 +52,16 @@ class HomeFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.flowWithLifecycle(viewLifecycleOwner.lifecycle).collect {
-                binding.textviewFirst.text = it.informationMessage.msg
+                binding.apply {
+                    textviewFirst.text = it.informationMessage.msg
 
-                if (it.isFetchingUsers) {
-                    binding.progressBar.visibility = View.VISIBLE
+                    if (it.isFetchingUsers) {
+                        progressBar.visibility = View.VISIBLE
+                    }
+
+                    if (it.users.isNotEmpty()) {
+                        adapter.list = it.users
+                    }
                 }
             }
         }
@@ -60,7 +72,7 @@ class HomeFragment : Fragment() {
     private fun bindingPreparation() = binding.apply {
         lifecycleOwner = this@HomeFragment
         homeViewModel = viewModel
-        //recyclerView.adapter =
+        recyclerView.adapter = adapter
 
         buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)

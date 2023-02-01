@@ -1,6 +1,7 @@
-package it.giaquinto.stargazersviewer.di.provider
+package it.giaquinto.stargazersviewer.di
 
 import android.util.Log
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,11 +44,11 @@ object ApiModule {
     fun provideRetrofitClient(httpClient: OkHttpClient): Retrofit = with(Retrofit.Builder()) {
         baseUrl(HttpConstants.BASE_URL)
         client(httpClient)
-        addConverterFactory(GsonConverterFactory.create())
+        addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         build()
     }
 
     @Singleton
     @Provides
-    fun provideUserInfo(retrofit: Retrofit) = retrofit.create(UserInfoApi::class.java)
+    fun provideUserInfo(retrofit: Retrofit): UserInfoApi = retrofit.create(UserInfoApi::class.java)
 }

@@ -2,11 +2,5 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="it.giaquinto.stargazersviewer.ui.MainActivity">
-    <item
-        android:id="@+id/action_login"
-        android:orderInCategory="100"
-        android:title="@string/action_login"
-        app:showAsAction="always"
-        android:icon="@drawable/baseline_login_24"
-        android:onClick="goToLogin"/>
+
 </menu>

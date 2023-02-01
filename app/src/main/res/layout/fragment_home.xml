@@ -25,11 +25,12 @@
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="@dimen/middle_margin"
             android:layout_marginEnd="@dimen/standard_margin"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="sans-serif-condensed"
             android:text="@{homeViewModel.uiState.informationMessage.msg}"
             android:textColor="@{homeViewModel.uiState.informationMessage.type.color}"
-            android:textSize="14sp"
+            android:textSize="24sp"
             android:visibility="@{homeViewModel.uiState.informationMessage.msg.length() != 0 ? View.VISIBLE : View.INVISIBLE}"
-            android:background="@drawable/rounded_corner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchView" />
@@ -67,14 +68,13 @@
             android:layout_marginTop="@dimen/high_margin"
             android:layout_marginEnd="@dimen/standard_margin"
             android:layout_marginBottom="@dimen/standard_margin"
-            android:visibility="@{homeViewModel.list.size() != 0 ? View.VISIBLE : View.GONE}"
-            android:background="@drawable/rounded_corner"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/git_hub_item"
             app:layout_constraintBottom_toTopOf="@+id/button_first"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_first"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_first" />
 
         <ProgressBar
             android:id="@+id/progressBar"

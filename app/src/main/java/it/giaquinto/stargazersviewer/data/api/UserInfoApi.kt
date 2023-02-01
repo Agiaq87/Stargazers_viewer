@@ -6,5 +6,5 @@ import retrofit2.http.Path
 
 interface UserInfoApi {
     @GET("users/{user}")
-    suspend fun fetchUserInfo(@Path("user") user: String): List<UserInfoModel>
+    suspend fun fetchUserInfo(@Path("user") user: String): UserInfoModel
 }

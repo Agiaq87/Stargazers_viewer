@@ -1,35 +1,35 @@
 package it.giaquinto.stargazersviewer.ui.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
-import it.giaquinto.stargazersviewer.R
-import it.giaquinto.stargazersviewer.data.exception.UnauthorizedException
-import it.giaquinto.stargazersviewer.ui.state.HomeUiState
-import it.giaquinto.stargazersviewer.data.repository.UserInfoRepository
+import it.giaquinto.stargazersviewer.data.api.ApiStatus
+import it.giaquinto.stargazersviewer.data.model.UserInfoModel
 import it.giaquinto.stargazersviewer.data.model.info.InformationMessage
 import it.giaquinto.stargazersviewer.data.model.info.InformationType
+import it.giaquinto.stargazersviewer.data.repository.UserInfoRepository
+import it.giaquinto.stargazersviewer.ui.state.HomeUiState
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val userInfoRepository: UserInfoRepository,
-    @ApplicationContext private val context: Context
+    private val userInfoRepository: UserInfoRepository
 ) : ViewModel() {
+
 
     private val _uiState = MutableStateFlow(
         HomeUiState(
             isSignedIn = false,
             isFetchingUsers = false,
             users = listOf(),
-            informationMessage = InformationMessage("Nothing to show", InformationType.INFO)
+            informationMessage = InformationMessage("Waiting for input", InformationType.INFO)
         )
     )
     val uiState: StateFlow<HomeUiState> = _uiState
@@ -45,7 +45,7 @@ class HomeViewModel @Inject constructor(
             _uiState.update {
                 it.copy(
                     informationMessage = InformationMessage(
-                        context.getString(R.string.three_characters),
+                        "Please insert at least three characters for searching",
                         InformationType.INFO
                     )
                 )
@@ -56,61 +56,62 @@ class HomeViewModel @Inject constructor(
 
         fetchJob?.cancel()
 
-        _uiState.update {
-            it.copy(
-                isFetchingUsers = true,
-                informationMessage = InformationMessage(
-                    "Searching...",
-                    InformationType.INFO
-                )
-            )
-        }
-
         fetchJob = viewModelScope.launch {
-            userInfoRepository.fetchUserInfo(searchData).also {
-                it.collect { userInfoRepository ->
-                _uiState.update { homeUiState ->
-
-                    if (userInfoRepository.isNotEmpty()) {
-                        homeUiState.copy(
-                            users = userInfoRepository,
-                            informationMessage = InformationMessage(
-                                "Founded ${userInfoRepository.size} ${if (userInfoRepository.size > 1) "user" else "users"}",
-                                InformationType.INFO
-                            )
-                        )
-                    } else {
-                        homeUiState.copy(
-                            isFetchingUsers = false,
-                            users = userInfoRepository,
-                            informationMessage = InformationMessage(
-                                context.getString(R.string.nothing_found),
-                                InformationType.WARNING
-                            )
-                        )
-                    }
-
-                }
-                    it.catch {
-                        _uiState.update { homeUiState ->
-                            homeUiState.copy(
-                                informationMessage = InformationMessage(
-                                    it.localizedMessage ?: context.getString(R.string.network_exception),
-                                    InformationType.ERROR
-                                )
-                            )
+            userInfoRepository.fetchUserInfo(searchData).collect { userInfoRepository ->
+                when (userInfoRepository.status) {
+                    ApiStatus.LOADING -> loading()
+                    ApiStatus.SUCCESS -> {
+                        userInfoRepository.data?.let { list ->
+                            foundIt(listOf(list))
+                        } ?: run {
+                            nothingToShow()
                         }
                     }
-            }
-            }
-
-            try {
-
-            } catch (ue: UnauthorizedException) {
-
+                    ApiStatus.ERROR -> networkError(userInfoRepository.message)
+                }
             }
         }
 
         return true
+    }
+
+    private fun loading() = _uiState.update {
+        it.copy(
+            isFetchingUsers = true,
+            informationMessage = InformationMessage(
+                "Searching...",
+                InformationType.INFO
+            )
+        )
+    }
+
+    private fun nothingToShow() = _uiState.update {
+        it.copy(
+            isFetchingUsers = false,
+            informationMessage = InformationMessage(
+                "Nothing to show",
+                InformationType.WARNING
+            )
+        )
+    }
+
+    private fun foundIt(list: List<UserInfoModel>) = _uiState.update {
+        it.copy(
+            isFetchingUsers = false,
+            users = list,
+            informationMessage = InformationMessage(
+                "Founded ${list.size} ${if (list.size > 1) "user" else "users"}",
+                InformationType.WARNING
+            )
+        )
+    }
+
+    private fun networkError(message: String?) = _uiState.update { homeUiState ->
+        homeUiState.copy(
+            informationMessage = InformationMessage(
+                message ?: "Network error, please try again later",
+                InformationType.ERROR
+            )
+        )
     }
 }

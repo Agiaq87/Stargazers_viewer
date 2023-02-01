@@ -25,16 +25,4 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/HomeFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/LoginFragment"
-        android:name="it.giaquinto.stargazersviewer.ui.fragment.LoginFragment"
-        android:label="Login to GitHub"
-        tools:layout="@layout/fragment_login">
-
-        <action
-            android:id="@+id/action_LoginFragment_to_FirstFragment"
-            app:destination="@+id/HomeFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
-    </fragment>
 </navigation>

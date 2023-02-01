@@ -49,31 +49,10 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_login -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
-    }
-
-    fun goToLogin(item: MenuItem) = with(item){
-        when(itemId) {
-            R.id.action_login -> {
-                if (viewModel.isLoading())
-                    Snackbar.make(binding.root, R.string.user_already_logged, Snackbar.LENGTH_SHORT).show()
-                else
-                    navController.navigate(R.id.LoginFragment)
-            }
-            else -> return@with
-        }
     }
 
 }
