@@ -7,12 +7,18 @@
     <dimen name="xxl_margin">96dp</dimen>
     <dimen name="xxxl_margin">112dp</dimen>
 
+    <dimen name="search_input_bar_dimen">32dp</dimen>
+    <dimen name="searching_bar_dimen">150dp</dimen>
+
     <dimen name="icon_image">24dp</dimen>
 
     <dimen name="avatar_image">48dp</dimen>
-    <dimen name="double_avatar_image">96dp</dimen>
+    <dimen name="special_avatar_image">144dp</dimen>
 
     <dimen name="standard_padding">16dp</dimen>
 
     <dimen name="button_width">188dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

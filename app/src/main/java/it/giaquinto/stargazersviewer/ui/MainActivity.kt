@@ -1,19 +1,16 @@
 package it.giaquinto.stargazersviewer.ui
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import it.giaquinto.stargazersviewer.R
 import it.giaquinto.stargazersviewer.databinding.ActivityMainBinding
-import it.giaquinto.stargazersviewer.ui.viewmodel.MainActivityViewModel
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -27,8 +24,6 @@ class MainActivity : AppCompatActivity() {
         findNavController(R.id.nav_host_fragment_content_main)
     }
 
-    private val viewModel: MainActivityViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -39,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            navController.navigate(R.id.SecondFragment)
+            navController.navigate(R.id.StargazersFragment)
         }
     }
 

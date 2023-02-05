@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="dataset"
+            type="it.giaquinto.stargazersviewer.data.model.RepoUserModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/low_margin"
+        android:background="@drawable/rounded_corner">
+
+
+        <TextView
+            android:id="@+id/repoNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_margin"
+            android:textAlignment="textStart"
+            android:textColor="@color/teal_200"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@{dataset.name}"
+            tools:text="@string/app_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_margin"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:text="@{dataset.description()}"
+            android:textColor="@color/secondary_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/imageView4"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repoNameTextView"
+            tools:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_margin"
+            android:paddingStart="@dimen/low_margin"
+            android:paddingEnd="@dimen/low_margin"
+            android:textColor="@color/secondary_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="@{dataset.private ? View.GONE : View.VISIBLE}"
+            android:background="@drawable/rounded_corner_violet"
+            android:text="@string/public_repo"
+            app:layout_constraintStart_toEndOf="@+id/repoNameTextView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/languageTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_margin"
+            android:text="@{dataset.language}"
+            android:textColor="@color/secondary_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionTextView"
+            tools:text="TextView" />
+
+        <ImageView
+            android:id="@+id/imageFork"
+            android:layout_width="@dimen/icon_image"
+            android:layout_height="@dimen/icon_image"
+            android:layout_margin="@dimen/standard_margin"
+            android:visibility="@{dataset.fork ? View.VISIBLE : View.GONE}"
+            android:backgroundTint="@color/secondary_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_fork_right_24" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="@dimen/icon_image"
+            android:layout_height="@dimen/icon_image"
+            android:layout_margin="@dimen/standard_margin"
+            android:visibility="@{dataset.hasWiki ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageFork"
+            app:srcCompat="@drawable/pngfind_com_github" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

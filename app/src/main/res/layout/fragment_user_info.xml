@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="it.giaquinto.stargazersviewer.ui.viewmodel.UserInfoViewModel" />
+        <variable
+            name="user"
+            type="it.giaquinto.stargazersviewer.data.model.UserInfoModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_primary"
+        tools:context=".ui.fragment.UserInfoFragment">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/avatarView"
+            android:layout_width="@dimen/special_avatar_image"
+            android:layout_height="@dimen/special_avatar_image"
+            android:layout_marginTop="@dimen/high_margin"
+            android:layout_marginStart="@dimen/high_margin"
+            android:contentDescription="@string/avatar"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_launcher_foreground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.circleImageView" />
+
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/middle_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:text="@{user.name}"
+            android:textColor="@color/primary_text"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatarView"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar"
+            tools:text="@string/app_name"/>
+
+        <TextView
+            android:id="@+id/nicknameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:text="@{user.login}"
+            android:textColor="@color/secondary_text"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatarView"
+            app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+            tools:text="@string/app_name"/>
+
+        <TextView
+            android:id="@+id/followersAndFollowingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:text="@{user.getFollowersAndFollowing()}"
+            android:textColor="@color/primary_text"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatarView"
+            app:layout_constraintTop_toBottomOf="@+id/nicknameTextView"
+            tools:text="@string/app_name" />
+
+        <TextView
+            android:id="@+id/repoAndGistTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:textColor="@color/primary_text"
+            android:textSize="16sp"
+            android:text="@{user.getPublicRepoAndGist}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatarView"
+            app:layout_constraintTop_toBottomOf="@+id/followersAndFollowingTextView"
+            tools:text="@string/app_name"/>
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.uiState.fetchingUsers ? View.VISIBLE : View.GONE}"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/purple_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/high_margin"
+            android:layout_marginHorizontal="@dimen/standard_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repoAndGistTextView" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

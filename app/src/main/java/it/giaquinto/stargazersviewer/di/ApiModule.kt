@@ -6,6 +6,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import it.giaquinto.stargazersviewer.data.api.RepoUserApi
+import it.giaquinto.stargazersviewer.data.api.StargazersApi
 import it.giaquinto.stargazersviewer.data.api.UserInfoApi
 import it.giaquinto.stargazersviewer.utils.constant.HttpConstants
 import okhttp3.OkHttpClient
@@ -51,4 +53,12 @@ object ApiModule {
     @Singleton
     @Provides
     fun provideUserInfo(retrofit: Retrofit): UserInfoApi = retrofit.create(UserInfoApi::class.java)
+
+    @Singleton
+    @Provides
+    fun provideStargazers(retrofit: Retrofit): StargazersApi = retrofit.create(StargazersApi::class.java)
+
+    @Singleton
+    @Provides
+    fun provideRepoUser(retrofit: Retrofit): RepoUserApi = retrofit.create(RepoUserApi::class.java)
 }
